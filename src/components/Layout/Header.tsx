@@ -12,11 +12,13 @@ const Header = () => {
 
   const scrollTo = (href: string) => {
     setIsMobileMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    } else {
+    if (href === "#projekte") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
