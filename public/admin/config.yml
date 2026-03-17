@@ -1,0 +1,100 @@
+backend:
+  name: git-gateway
+  branch: master
+
+locale: 'de'
+
+media_folder: "public/images"
+public_folder: "images"
+
+collections:
+  - name: "projekte"
+    label: "Projekte"
+    label_singular: "Projekt"
+    folder: "src/content/projects"
+    create: true
+    format: "json"
+    slug: "{{fields.id}}-{{fields.title}}"
+    sortable_fields: ['id', 'title', 'year']
+    fields:
+      - { label: "ID (Nummer)", name: "id", widget: "number", value_type: "int" }
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Untertitel", name: "subtitle", widget: "string", required: false }
+      - { label: "Jahr", name: "year", widget: "string" }
+      - label: "Bilder"
+        name: "images"
+        widget: "list"
+        field: { label: "Bild", name: "image", widget: "image" }
+      - { label: "Beschreibung", name: "mainText", widget: "text" }
+      - { label: "Link URL", name: "linkUrl", widget: "string", required: false }
+      - { label: "Link Text", name: "linkLabel", widget: "string", required: false }
+      - label: "Kenndaten"
+        name: "metaData"
+        widget: "list"
+        fields:
+          - { label: "Bezeichnung", name: "label", widget: "string", required: false }
+          - { label: "Wert", name: "value", widget: "string", required: false }
+
+  - name: "settings"
+    label: "Einstellungen"
+    files:
+      - name: "studio"
+        label: "Studio Text"
+        file: "src/content/studio.json"
+        fields:
+          - label: "Absätze"
+            name: "paragraphs"
+            widget: "list"
+            field: { label: "Absatz", name: "paragraph", widget: "text" }
+          - { label: "Zitat", name: "quote", widget: "string" }
+          - { label: "Zitat Autor", name: "quoteAuthor", widget: "string" }
+          - { label: "LinkedIn URL", name: "linkedinUrl", widget: "string" }
+          - { label: "Instagram URL", name: "instagramUrl", widget: "string" }
+
+      - name: "cv"
+        label: "Lebenslauf"
+        file: "src/content/cv.json"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - label: "Ausbildung"
+            name: "ausbildung"
+            widget: "list"
+            fields:
+              - { label: "Jahr", name: "year", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+          - label: "Tätigkeiten"
+            name: "taetigkeiten"
+            widget: "list"
+            fields:
+              - { label: "Jahr", name: "year", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+          - label: "Forschung"
+            name: "forschung"
+            widget: "list"
+            fields:
+              - { label: "Jahr", name: "year", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+          - label: "Vorträge & Workshops"
+            name: "vortraege"
+            widget: "list"
+            fields:
+              - { label: "Jahr", name: "year", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+
+      - name: "impressum"
+        label: "Impressum"
+        file: "src/content/impressum.json"
+        fields:
+          - { label: "Firmenname", name: "firmenname", widget: "string" }
+          - { label: "Inhaber", name: "inhaber", widget: "string" }
+          - { label: "Straße", name: "strasse", widget: "string" }
+          - { label: "PLZ", name: "plz", widget: "string" }
+          - { label: "Ort", name: "ort", widget: "string" }
+          - { label: "USt-ID", name: "ustId", widget: "string" }
+          - { label: "Telefon", name: "telefon", widget: "string" }
+          - { label: "E-Mail 1", name: "email1", widget: "string" }
+          - { label: "E-Mail 2", name: "email2", widget: "string", required: false }
+          - { label: "Kammer", name: "kammer", widget: "string" }
+          - { label: "Kammer Adresse", name: "kammerAdresse", widget: "string" }
+          - { label: "Versicherer", name: "versicherer", widget: "string" }
+          - { label: "Versicherer Adresse", name: "versichererAdresse", widget: "string" }

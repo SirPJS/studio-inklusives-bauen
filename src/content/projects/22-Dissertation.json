@@ -1,0 +1,27 @@
+{
+  "id": 22,
+  "title": "Dissertation",
+  "subtitle": "Kompendium, 2022",
+  "year": "2022",
+  "images": [
+    "images/dissertation/1_Dissertation.jpg",
+    "images/dissertation/2_Dissertation.jpg",
+    "images/dissertation/3_Dissertation.jpg",
+    "images/dissertation/4_Dissertation.jpg",
+    "images/dissertation/5_Dissertation.jpg",
+    "images/dissertation/6_Dissertation.jpg"
+  ],
+  "mainText": "Quartiersbezogene Wohnformen für Menschen mit Pflege- und Betreuungsbedarf\nUntersuchungen zur Wirksamkeit adaptiver Gebäudekonzepte am Beispiel von Großwohnungen für Wohngemeinschaften\n\nQuartiersbezogene Wohnformen richten sich an Menschen, die in ihrem Alltag auf Unterstützung in Form von Pflege- und Betreuungsleistungen oder einer Assistenz angewiesen sind. Ihr ambulantes Versorgungskonzept ist dabei als Gegenmodell zur klassischen Heimunterbringung zu verstehen, da es die Wohnung von den erforderlichen Dienstleistungen entkoppelt und somit eine größere Wahlfreiheit schafft.\n\nWas sind die Faktoren einer baulichen Inklusionsfähigkeit im Wohnungsbau und welcher strukturellen Ordnung bedarf das Gebäude, damit es sich an wandelnde Bedarfe der Nutzer:innen längerfristig anpassen und auch im Sinne einer Versorgungssicherheit nachhaltig sein kann?\n\nEine besondere Herausforderung ergibt sich bei der Erstellung und Vorhaltung von Großwohnungen für Wohngemeinschaften mit Betreuungsleistungen, die eine Wohnfläche von circa vierhundert Quadratmetern benötigen und dennoch baulich in generationengemischte Hausgemeinschaften eingebunden sein sollen. Der zentrale Teil der Dissertation widmet sich dieser Wohnform auf den Ebenen der Funktion und der konstruktiven Umsetzung.",
+  "linkUrl": "https://publications.rwth-aachen.de/record/849541",
+  "linkLabel": "Veröffentlichung auf RWTH Publications",
+  "metaData": [
+    {
+      "label": "",
+      "value": "Dr. Ing. Carsten Eiden"
+    },
+    {
+      "label": "",
+      "value": "RWTH Aachen University"
+    }
+  ]
+}
