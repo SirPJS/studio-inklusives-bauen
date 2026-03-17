@@ -140,10 +140,15 @@ const Footer = () => {
 
               <div>
                 <p>
-                  Webdesign:{" "}
-                  <span className="text-red-500">
-                    Paul Jakob Scheffler (kl&auml;ren, ob Nennung gew&uuml;nscht)
-                  </span>
+                  Webentwicklung:{" "}
+                  <a
+                    href="https://practicl.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link hover:underline"
+                  >
+                    practicl
+                  </a>
                 </p>
               </div>
 
