@@ -1,6 +1,33 @@
 import { useState } from "react";
 import impressumData from "../../content/impressum.json";
 
+interface LineItem {
+  type?: string;
+  text?: string;
+  url?: string;
+}
+
+const renderLine = (line: string | LineItem, i: number) => {
+  if (typeof line === "string") {
+    return <p key={i}>{line}</p>;
+  }
+  if (line.type === "link" && line.url && line.text) {
+    return (
+      <p key={i}>
+        <a
+          href={line.url}
+          target={line.url.startsWith("mailto:") ? undefined : "_blank"}
+          rel="noopener noreferrer"
+          className="text-link hover:underline"
+        >
+          {line.text}
+        </a>
+      </p>
+    );
+  }
+  return null;
+};
+
 const Footer = () => {
   const [showImpressum, setShowImpressum] = useState(false);
 
@@ -25,7 +52,7 @@ const Footer = () => {
             <div className="flex items-start justify-between">
               <button
                 onClick={() => setShowImpressum(false)}
-                className="group text-left"
+                className="group text-right"
               >
                 <div className="flex flex-col items-end leading-[1.1]">
                   <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">Studio</span>
@@ -40,48 +67,18 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="max-w-xl mx-auto px-6 pb-20">
-            <h2 className="font-bold text-sm mb-6">Impressum</h2>
-            <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
-              <p>Angaben gem. &sect;5 TMG:</p>
-              <div>
-                <p>{impressumData.firmenname}</p>
-                <p>{impressumData.inhaber}</p>
-                <p>{impressumData.strasse}</p>
-                <p>{impressumData.plz} {impressumData.ort}</p>
-                <p>USt.-ID Nr. Gem&auml;&szlig; &sect;27a UStG: {impressumData.ustId}</p>
-              </div>
-              <div>
-                <p>Kontakt: {impressumData.telefon}</p>
-                <p><a href={`mailto:${impressumData.email1}`} className="hover:underline">{impressumData.email1}</a></p>
-                {impressumData.email2 && (
-                  <p><a href={`mailto:${impressumData.email2}`} className="hover:underline">{impressumData.email2}</a></p>
-                )}
-              </div>
-              <div>
-                <p className="font-medium text-foreground">Berufsbezeichnung und berufsrechtliche Regelungen:</p>
-                <p>Berufsbezeichnung: Architekt</p>
-                <p>Zust&auml;ndige Kammer: {impressumData.kammer},</p>
-                <p>K&ouml;rperschaft des &ouml;ffentlichen Rechts</p>
-                <p>{impressumData.kammerAdresse}</p>
-              </div>
-              <div>
-                <p>Es gelten folgende berufsrechtliche Regelungen:</p>
-                <p>Baukammerngesetz NRW BauKaG NW</p>
-                <p>Durchf&uuml;hrungsverordnung DVO BauKaG NW</p>
-                <p>Hauptsatzung der Architektenkammer Nordrhein-Westfalen</p>
-                <p>Regelungen einsehbar unter: <a href="https://aknw.de" target="_blank" rel="noopener noreferrer" className="text-link hover:underline">aknw.de</a></p>
-              </div>
-              <div>
-                <p>Angaben zur Berufshaftpflichtversicherung</p>
-                <p>Name und Sitz des Versicherers: {impressumData.versicherer}</p>
-                <p>{impressumData.versichererAdresse}</p>
-              </div>
-              <div>
-                <p>Webentwicklung: <a href="https://practicl.de" target="_blank" rel="noopener noreferrer" className="text-link hover:underline">practicl</a></p>
-              </div>
-              <div>
-                <p>Datenschutz: Diese Website erhebt keine nutzerbezogenen Daten bei Ihrem Besuch und verwendet keine Cookies.</p>
+          {/* Impressum content - narrower and offset right */}
+          <div className="flex justify-center px-6 pb-20">
+            <div className="w-full max-w-sm ml-auto mr-auto md:ml-[15%]">
+              <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
+                {impressumData.blocks.map((block, bi) => (
+                  <div key={bi}>
+                    {block.heading && (
+                      <p className="font-bold text-foreground text-sm mb-1">{block.heading}</p>
+                    )}
+                    {block.lines.map((line, li) => renderLine(line as string | LineItem, li))}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

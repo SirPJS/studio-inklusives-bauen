@@ -1,15 +1,70 @@
 {
-  "firmenname": "Studio inklusives Bauen",
-  "inhaber": "Dr.-Ing. Architekt Carsten Eiden (AKNW 34141)",
-  "strasse": "Lütticher Straße 56",
-  "plz": "50674",
-  "ort": "Köln",
-  "ustId": "DE311248173",
-  "telefon": "+49 179 1312534",
-  "email1": "mail@studioinklusivesbauen.de",
-  "email2": "mail@carsteneiden-architekt.de",
-  "kammer": "Architektenkammer Nordrhein Westfalen",
-  "kammerAdresse": "Zollhof 1, 40221 Düsseldorf",
-  "versicherer": "Markel International",
-  "versichererAdresse": "Luisenstraße 14, 80333 München"
+  "blocks": [
+    {
+      "heading": "Impressum",
+      "lines": []
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Angaben gem. §5 TMG:"
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Studio inklusives Bauen",
+        "Dr.-Ing. Architekt Carsten Eiden (AKNW 34141)",
+        "Lütticher Straße 56",
+        "50674 Köln",
+        "USt.-ID Nr. Gemäß §27a UStG: DE311248173"
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Kontakt: +49 179 1312534",
+        {"type": "link", "text": "mail@studioinklusivesbauen.de", "url": "mailto:mail@studioinklusivesbauen.de"}
+      ]
+    },
+    {
+      "heading": "Berufsbezeichnung und berufsrechtliche Regelungen:",
+      "lines": [
+        "Berufsbezeichnung: Architekt",
+        "Zuständige Kammer: Architektenkammer Nordrhein Westfalen,",
+        "Körperschaft des öffentlichen Rechts",
+        "Zollhof 1, 40221 Düsseldorf"
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Es gelten folgende berufsrechtliche Regelungen:",
+        "Baukammerngesetz NRW BauKaG NW",
+        "Durchführungsverordnung DVO BauKaG NW",
+        "Hauptsatzung der Architektenkammer Nordrhein-Westfalen",
+        {"type": "link", "text": "Regelungen einsehbar unter: aknw.de", "url": "https://aknw.de"}
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Angaben zur Berufshaftpflichtversicherung",
+        "Name und Sitz des Versicherers: Markel International",
+        "Luisenstraße 14, 80333 München"
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        {"type": "link", "text": "Webentwicklung: practicl", "url": "https://practicl.de"}
+      ]
+    },
+    {
+      "heading": "",
+      "lines": [
+        "Datenschutz: Diese Website erhebt keine nutzerbezogenen Daten bei Ihrem Besuch und verwendet keine Cookies."
+      ]
+    }
+  ]
 }

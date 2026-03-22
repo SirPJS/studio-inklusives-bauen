@@ -2,7 +2,7 @@ import studioData from "../content/studio.json";
 
 const Studio = () => {
   return (
-    <section id="ueber" className="py-16 md:py-24 border-t border-border">
+    <section id="ueber" className="py-16 md:py-24">
       <div className="flex justify-end" style={{ paddingRight: '5vw' }}>
       <div className="w-full max-w-[90%] md:max-w-[60%] flex flex-col items-center">
       <div className="max-w-lg text-left space-y-6">

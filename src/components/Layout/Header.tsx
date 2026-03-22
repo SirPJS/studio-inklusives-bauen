@@ -30,26 +30,29 @@ const Header = () => {
   return (
     <header className="w-full bg-background sticky top-0 z-50">
       <div className="flex items-start justify-between py-8 md:py-12" style={{ paddingLeft: '5vw', paddingRight: '5vw' }}>
-        {/* Logo */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="group text-right"
-        >
-          <div className="flex flex-col items-end leading-[1.1]">
-            <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
-              Studio
-            </span>
-            <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide -mr-[0.3em]">
-              inklusives
-            </span>
-            <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
-              Bauen
-            </span>
-          </div>
-        </button>
+        {/* Logo - right-aligned block, positioned closer to project containers */}
+        <div className="flex-1">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="group block ml-auto"
+            style={{ marginRight: 'max(40%, calc(100% - 60% - 2vw))' }}
+          >
+            <div className="flex flex-col items-end leading-[1.3]">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
+                Studio
+              </span>
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide -mr-[0.3em]">
+                inklusives
+              </span>
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
+                Bauen
+              </span>
+            </div>
+          </button>
+        </div>
 
         {/* Navigation */}
-        <nav className="hidden md:flex flex-col items-end space-y-1 pt-2">
+        <nav className="hidden md:flex flex-col items-end space-y-1 pt-2 flex-shrink-0">
           {navItems.map((item) => (
             <button
               key={item.href}

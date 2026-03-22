@@ -55,39 +55,43 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
               </button>
             </div>
           ) : (
-            <div className="py-8 text-center space-y-6">
-              <p>
-                <span className="font-bold">{project.title}</span>
-                {", "}
-                <span>{project.year}</span>
-              </p>
+            <div className="py-8 space-y-6">
+              <div className="max-w-md text-left">
+                <p>
+                  <span className="font-bold">{project.title}</span>
+                  {", "}
+                  <span>{project.year}</span>
+                </p>
 
-              <div className="body-small text-muted-foreground leading-relaxed space-y-3">
-                {project.mainText.split("\n\n").map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
+                <div className="body-small text-muted-foreground leading-relaxed space-y-3 mt-4">
+                  {project.mainText.split("\n\n").map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+
+                {project.linkUrl && (
+                  <p className="text-xs mt-4">
+                    <span>{project.linkLabel}: </span>
+                    <a
+                      href={project.linkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-link hover:opacity-70 transition-opacity"
+                    >
+                      {project.linkUrl}
+                    </a>
+                  </p>
+                )}
               </div>
 
-              {project.linkUrl && (
-                <p className="text-xs">
-                  <span>{project.linkLabel}: </span>
-                  <a
-                    href={project.linkUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-link hover:opacity-70 transition-opacity"
-                  >
-                    {project.linkUrl}
-                  </a>
-                </p>
-              )}
-
-              <button
-                onClick={() => setShowText(false)}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer mt-4"
-              >
-                schlie&szlig;en
-              </button>
+              <div className="text-center">
+                <button
+                  onClick={() => setShowText(false)}
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer mt-4"
+                >
+                  schlie&szlig;en
+                </button>
+              </div>
             </div>
           )}
         </div>
