@@ -67,9 +67,10 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Impressum content - narrower and offset right */}
-          <div className="flex justify-center px-6 pb-20">
-            <div className="w-full max-w-sm ml-auto mr-auto md:ml-[15%]">
+          {/* Impressum content - aligned with Studio/CV text on main page */}
+          <div className="flex justify-end pb-20" style={{ paddingRight: '5vw' }}>
+            <div className="w-full max-w-[90%] md:max-w-[60%] flex flex-col items-center">
+            <div className="max-w-lg w-full">
               <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
                 {impressumData.blocks.map((block, bi) => (
                   <div key={bi}>
@@ -80,6 +81,7 @@ const Footer = () => {
                   </div>
                 ))}
               </div>
+            </div>
             </div>
           </div>
         </div>
