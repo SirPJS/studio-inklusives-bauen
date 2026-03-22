@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
               </button>
             </div>
           ) : (
-            <div className="py-8 space-y-6">
+            <div className="py-8 space-y-6 flex flex-col items-center">
               <div className="max-w-md text-left">
                 <p>
                   <span className="font-bold">{project.title}</span>
@@ -84,14 +84,12 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
                 )}
               </div>
 
-              <div className="text-center">
-                <button
-                  onClick={() => setShowText(false)}
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer mt-4"
-                >
-                  schlie&szlig;en
-                </button>
-              </div>
+              <button
+                onClick={() => setShowText(false)}
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer mt-4"
+              >
+                schlie&szlig;en
+              </button>
             </div>
           )}
         </div>

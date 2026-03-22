@@ -30,21 +30,21 @@ const Header = () => {
   return (
     <header className="w-full bg-background sticky top-0 z-50">
       <div className="flex items-start justify-between py-8 md:py-12" style={{ paddingLeft: '5vw', paddingRight: '5vw' }}>
-        {/* Logo - right-aligned block, positioned closer to project containers */}
+        {/* Logo - text block is right-aligned internally, positioned a bit left of project left edge */}
         <div className="flex-1">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group block ml-auto"
-            style={{ marginRight: 'max(40%, calc(100% - 60% - 2vw))' }}
+            className="group block"
+            style={{ marginLeft: 'calc(40% - 12vw)' }}
           >
             <div className="flex flex-col items-end leading-[1.3]">
-              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">
                 Studio
               </span>
-              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide -mr-[0.3em]">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
                 inklusives
               </span>
-              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">
                 Bauen
               </span>
             </div>
