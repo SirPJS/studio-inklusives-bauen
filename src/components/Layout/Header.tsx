@@ -35,7 +35,7 @@ const Header = () => {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="group block"
-            style={{ marginLeft: 'calc(40% - 12vw)' }}
+            style={{ marginLeft: 'clamp(5vw, calc(40% - 18vw), 35%)' }}
           >
             <div className="flex flex-col items-end leading-[1.3]">
               <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">
