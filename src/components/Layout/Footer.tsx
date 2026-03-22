@@ -32,11 +32,7 @@ const Footer = () => {
   const [showImpressum, setShowImpressum] = useState(false);
 
   useEffect(() => {
-    if (showImpressum) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = showImpressum ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [showImpressum]);
 
@@ -56,10 +52,11 @@ const Footer = () => {
       </footer>
 
       {showImpressum && (
-        <div className="fixed inset-0 z-[100] bg-background overflow-y-auto" style={{ overscrollBehavior: 'contain' }}>
-          <div className="py-8 md:py-12" style={{ paddingLeft: '5vw', paddingRight: '5vw' }}>
-            <div className="flex items-start justify-between">
-              {/* Logo - same layout as main Header */}
+        <div className="fixed inset-0 z-[100] bg-background overflow-y-auto">
+          {/* Header - exact same layout as main Header.tsx */}
+          <header className="w-full bg-background sticky top-0 z-50">
+            <div className="flex items-start justify-between py-8 md:py-12" style={{ paddingLeft: '5vw', paddingRight: '5vw' }}>
+              {/* Logo - identical to Header.tsx */}
               <div className="flex-1">
                 <button
                   onClick={() => setShowImpressum(false)}
@@ -67,34 +64,46 @@ const Footer = () => {
                   style={{ marginLeft: 'clamp(5vw, calc(40% - 24vw), 35%)' }}
                 >
                   <div className="flex flex-col items-end leading-[1.3]">
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">Studio</span>
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">inklusives</span>
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">Bauen</span>
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">
+                      Studio
+                    </span>
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide">
+                      inklusives
+                    </span>
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide pl-[0.3em]">
+                      Bauen
+                    </span>
                   </div>
                 </button>
               </div>
+
+              {/* Navigation - identical to Header.tsx */}
               <nav className="hidden md:flex flex-col items-end space-y-1 pt-2 flex-shrink-0">
-                <button onClick={() => setShowImpressum(false)} className="nav-link text-base lg:text-lg text-foreground cursor-pointer">Projekte</button>
-                <button onClick={() => setShowImpressum(false)} className="nav-link text-base lg:text-lg text-foreground cursor-pointer">&uuml;ber</button>
+                <button onClick={() => setShowImpressum(false)} className="nav-link text-base lg:text-lg text-foreground cursor-pointer">
+                  Projekte
+                </button>
+                <button onClick={() => setShowImpressum(false)} className="nav-link text-base lg:text-lg text-foreground cursor-pointer">
+                  über
+                </button>
               </nav>
             </div>
-          </div>
+          </header>
 
           {/* Impressum content - aligned with Studio/CV text on main page */}
           <div className="flex justify-end pb-20" style={{ paddingRight: '5vw' }}>
             <div className="w-full max-w-[90%] md:max-w-[60%] flex flex-col items-center">
-            <div className="max-w-lg w-full">
-              <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
-                {impressumData.blocks.map((block, bi) => (
-                  <div key={bi}>
-                    {block.heading && (
-                      <p className="font-bold text-foreground text-sm mb-1">{block.heading}</p>
-                    )}
-                    {block.lines.map((line, li) => renderLine(line as string | LineItem, li))}
-                  </div>
-                ))}
+              <div className="max-w-lg w-full">
+                <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
+                  {impressumData.blocks.map((block, bi) => (
+                    <div key={bi}>
+                      {block.heading && (
+                        <p className="font-bold text-foreground text-sm mb-1">{block.heading}</p>
+                      )}
+                      {block.lines.map((line, li) => renderLine(line as string | LineItem, li))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
