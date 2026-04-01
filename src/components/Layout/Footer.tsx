@@ -32,8 +32,17 @@ const Footer = () => {
   const [showImpressum, setShowImpressum] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = showImpressum ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (showImpressum) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
   }, [showImpressum]);
 
   return (
@@ -52,9 +61,9 @@ const Footer = () => {
       </footer>
 
       {showImpressum && (
-        <div className="fixed inset-0 z-[100] bg-background overflow-y-auto">
-          {/* Header - exact same layout as main Header.tsx */}
-          <header className="w-full bg-background sticky top-0 z-50">
+        <div className="fixed inset-0 z-[100] bg-background flex flex-col">
+          {/* Header - pinned at top, identical to Header.tsx */}
+          <header className="w-full bg-background flex-shrink-0">
             <div className="flex items-start justify-between py-8 md:py-12" style={{ paddingLeft: '5vw', paddingRight: '5vw' }}>
               {/* Logo - identical to Header.tsx */}
               <div className="flex-1">
@@ -89,19 +98,21 @@ const Footer = () => {
             </div>
           </header>
 
-          {/* Impressum content - aligned with Studio/CV text on main page */}
-          <div className="flex justify-end pb-20" style={{ paddingRight: '5vw' }}>
-            <div className="w-full max-w-[90%] md:max-w-[60%] flex flex-col items-center">
-              <div className="max-w-lg w-full">
-                <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
-                  {impressumData.blocks.map((block, bi) => (
-                    <div key={bi}>
-                      {block.heading && (
-                        <p className="font-bold text-foreground text-sm mb-1">{block.heading}</p>
-                      )}
-                      {block.lines.map((line, li) => renderLine(line as string | LineItem, li))}
-                    </div>
-                  ))}
+          {/* Scrollable content area - only this scrolls */}
+          <div className="flex-1 overflow-y-auto">
+            <div className="flex justify-end pb-20" style={{ paddingRight: '5vw' }}>
+              <div className="w-full max-w-[90%] md:max-w-[60%] flex flex-col items-center">
+                <div className="max-w-lg w-full">
+                  <div className="text-xs text-muted-foreground space-y-5 leading-relaxed">
+                    {impressumData.blocks.map((block, bi) => (
+                      <div key={bi}>
+                        {block.heading && (
+                          <p className="font-bold text-foreground text-sm mb-1">{block.heading}</p>
+                        )}
+                        {block.lines.map((line, li) => renderLine(line as string | LineItem, li))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

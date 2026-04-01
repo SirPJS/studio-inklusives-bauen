@@ -48,8 +48,8 @@ collections:
             field: { label: "Absatz", name: "paragraph", widget: "text" }
           - { label: "Zitat", name: "quote", widget: "string" }
           - { label: "Zitat Autor", name: "quoteAuthor", widget: "string" }
-          - { label: "LinkedIn URL", name: "linkedinUrl", widget: "string" }
-          - { label: "Instagram URL", name: "instagramUrl", widget: "string" }
+          - { label: "LinkedIn URL", name: "linkedinUrl", widget: "string", required: false }
+          - { label: "Instagram URL", name: "instagramUrl", widget: "string", required: false }
 
       - name: "cv"
         label: "Lebenslauf"
@@ -80,21 +80,23 @@ collections:
             fields:
               - { label: "Jahr", name: "year", widget: "string" }
               - { label: "Text", name: "text", widget: "text" }
+          - label: "Ehrenamt"
+            name: "ehrenamt"
+            widget: "list"
+            fields:
+              - { label: "Jahr", name: "year", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
 
       - name: "impressum"
         label: "Impressum"
         file: "src/content/impressum.json"
         fields:
-          - { label: "Firmenname", name: "firmenname", widget: "string" }
-          - { label: "Inhaber", name: "inhaber", widget: "string" }
-          - { label: "Straße", name: "strasse", widget: "string" }
-          - { label: "PLZ", name: "plz", widget: "string" }
-          - { label: "Ort", name: "ort", widget: "string" }
-          - { label: "USt-ID", name: "ustId", widget: "string" }
-          - { label: "Telefon", name: "telefon", widget: "string" }
-          - { label: "E-Mail 1", name: "email1", widget: "string" }
-          - { label: "E-Mail 2", name: "email2", widget: "string", required: false }
-          - { label: "Kammer", name: "kammer", widget: "string" }
-          - { label: "Kammer Adresse", name: "kammerAdresse", widget: "string" }
-          - { label: "Versicherer", name: "versicherer", widget: "string" }
-          - { label: "Versicherer Adresse", name: "versichererAdresse", widget: "string" }
+          - label: "Blöcke"
+            name: "blocks"
+            widget: "list"
+            fields:
+              - { label: "Überschrift", name: "heading", widget: "string", required: false }
+              - label: "Zeilen (Text)"
+                name: "lines"
+                widget: "list"
+                field: { label: "Zeile", name: "line", widget: "string" }

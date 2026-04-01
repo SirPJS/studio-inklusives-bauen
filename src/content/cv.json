@@ -1,5 +1,5 @@
 {
-  "name": "Dr. Ing. Architekt Carsten Eiden",
+  "name": "Dr.-Ing. Architekt Carsten Eiden",
   "ausbildung": [
     {
       "year": "2022",
@@ -7,10 +7,10 @@
     },
     {
       "year": "1998",
-      "text": "Diplom am Lehrstuhl Gebäudelehre, Univ.-Prof. Klaus Kada\n[Auszeichnung beim Euregionalen Architekturpreis - EAP]"
+      "text": "Diplom am Lehrstuhl Gebäudelehre, Univ.-Prof. Klaus Kada\n[Auszeichnung beim Euregionalen Architekturpreis – EAP]"
     },
     {
-      "year": "1991-1998",
+      "year": "1991–1998",
       "text": "Architekturstudium an der RWTH Aachen"
     }
   ],
@@ -20,19 +20,23 @@
       "text": "Studio inklusives Bauen, Köln"
     },
     {
-      "year": "seit 2017",
-      "text": "Carsten Eiden Architekt, Köln\n[Einzelunternehmer, Projektpartner der Arbeitsgemeinschaft mit Aretz Dürr Architektur BDA, Köln]"
+      "year": "seit 2024",
+      "text": "studio bauko architekten, Aachen\n[projektbezogene Kooperation]"
     },
     {
-      "year": "2012-2017",
+      "year": "seit 2017",
+      "text": "Carsten Eiden Architekt, Köln\n[Inhaber, Projektpartner der Arbeitsgemeinschaft mit Aretz Dürr Architektur BDA, Köln]"
+    },
+    {
+      "year": "2012–2017",
       "text": "elm[a] eidenlenznermathow Architektur, Köln\n[Partner der Architekten-PartGmbB]"
     },
     {
       "year": "seit 2012",
-      "text": "Wissenschaftlicher Mitarbeiter am Lehrstuhl Baukonstruktion, Univ.-Prof. Hartwig Schneider, RWTH Aachen University"
+      "text": "Wissenschaftlicher Mitarbeiter am Lehrstuhl Baukonstruktion, Univ.-Prof. Hartwig Schneider, RWTH Aachen University\n[überwiegend in Teilzeit, 30 Wochenstunden]"
     },
     {
-      "year": "2002-2012",
+      "year": "2002–2012",
       "text": "Eiden + Lenzner Architekten, Köln\n[Partner der GbR]"
     },
     {
@@ -40,18 +44,18 @@
       "text": "Mitglied der Architektenkammer Nordrhein-Westfalen"
     },
     {
-      "year": "1998-2001",
-      "text": "Mitarbeiter bei\nSteves & Borsum Architekten, Köln [Projektleitung]\nFWW - Prof. Fuhrmann Wallrath Weinert Architekten, Köln\nHeiermann Architekten, Köln"
+      "year": "1998–2001",
+      "text": "Mitarbeiter bei\nSteves & Borsum Architekten, Köln [Projektleitung]\nFWW – Prof. Fuhrmann Wallrath Weinert Architekten, Köln\nHeiermann Architekten, Köln"
     }
   ],
   "forschung": [
     {
       "year": "2022",
-      "text": "Herausgabe eines Kompendiums der 2022 erschienenen Dissertation als Planungsleitfaden für Architektinnen und Wohnungswirtschaft"
+      "text": "Herausgabe eines Kompendiums der 2022 erschienenen Dissertation als Planungsleitfaden für ArchitektInnen und Wohnungsunternehmen"
     },
     {
       "year": "2017–2022",
-      "text": "Dissertation: Quartiersbezogene Wohnformen für Menschen mit Pflege- und Betreuungsbedarf - Untersuchungen zur Wirksamkeit adaptiver Gebäudekonzepte am Beispiel von Großwohnungen für Wohngemeinschaften"
+      "text": "Dissertation: Quartiersbezogene Wohnformen für Menschen mit Pflege- und Betreuungsbedarf – Untersuchungen zur Wirksamkeit adaptiver Gebäudekonzepte am Beispiel von Großwohnungen für Wohngemeinschaften"
     },
     {
       "year": "seit 2021",
@@ -67,17 +71,17 @@
     },
     {
       "year": "2015–2016",
-      "text": "Forschungsprojekt Quartierspflegekern - Entwicklung von quartiersbezogenen Wohnkonzepten mit Pflegekern\nLaufzeit: 12 Monate\nFördergeber: GKV Spitzenverband im Auftrag des BMG\nForschungspartner: empirica ag, Berlin"
+      "text": "Forschungsprojekt Quartierspflegekern – Entwicklung von quartiersbezogenen Wohnkonzepten mit Pflegekern\nLaufzeit: 12 Monate\nFördergeber: GKV Spitzenverband im Auftrag des BMG\nForschungspartner: empirica ag, Berlin"
     }
   ],
   "vortraege": [
     {
       "year": "2026",
-      "text": "Online-Impulsvortrag im Rahmen der Reihe Gesundheitsbauten der Zukunft / AKG e.V. Referat 8: Architektur + Gesundheit - Bauaufgabe MZEB | Fallbeispiele aus NRW - zwischen Wunsch und Wirklichkeit"
+      "text": "Online-Impulsvortrag im Rahmen der Reihe „Gesundheitsbauten der Zukunft” | AKG e.V.\nReferat 6: „Architektur + Gesundheit: Bauaufgabe MZEB | Fallbeispiele aus NRW – zwischen Wunsch und Wirklichkeit”"
     },
     {
       "year": "2025",
-      "text": "Online-Gastvortrag Wohnen + an der TU München im Rahmen der Reihe Impulse to go: Architektur und Medizin im Dialog"
+      "text": "Online-Gastvortrag „Wohnen +” an der TU München im Rahmen der Reihe Impulse to go: Architektur und Medizin im Dialog"
     },
     {
       "year": "2025",
@@ -85,7 +89,65 @@
     },
     {
       "year": "2024/25",
-      "text": "Architektonische Beratung bei der Realisierung eines inklusiven Familienhauses der Stegerwald Stiftung, Leverkusen"
+      "text": "Architektonische Beratung bei der Neuausrichtung eines inklusiven Ferienhauses der Stephanus Stiftung, Usedom\n[mit Nicole Bode-May]"
+    },
+    {
+      "year": "2024",
+      "text": "Workshop mit den Führungskräften des Heilpädagogische Hilfe Osnabrück e.V. (kurz HHO) zum Thema inklusive Quartiersentwicklung und teilhabeorientierte Wohnangebote\n[mit Nicole Bode-May]"
+    },
+    {
+      "year": "2023",
+      "text": "Vorträge im Rahmen von Workshops mit der Geschäftsführung des Kuratorium Wiener Pensionisten-Wohnhäuser zum Thema Grätzelvernetzung und Steigerung der Wohnqualität\n[mit Nicole Bode-May]"
+    },
+    {
+      "year": "2023",
+      "text": "Impulsvortrag beim Innovationsfrühstück – Häuser zum Leben, KWP, Wien\n[mit Nicole Bode-May]"
+    },
+    {
+      "year": "2022",
+      "text": "Gruppenleitung im Experimentierworkshop | Wohnen wandelt Innenstadt im Rahmen des Pop-Up Campus, Aachen"
+    },
+    {
+      "year": "2022",
+      "text": "Ausrichter der Tagung „Architektur + Gesundheit”, RWTH Aachen University\n[Konzeption und Moderation mit Nicole Bode-May]"
+    },
+    {
+      "year": "2022",
+      "text": "Impulsvortrag „Architektur und Geriatrie” beim Intensivkurs Geriatrie, BDI e.V. in Wien\n[mit Nicole Bode-May]"
+    },
+    {
+      "year": "2021",
+      "text": "Referent der digitalen Gründungskonferenz „Making of Housing” des interdisziplinären Forschungsnetzwerks Wohnen an der RWTH Aachen"
+    },
+    {
+      "year": "2021",
+      "text": "Referent beim digitalen Fachtag „Pflege und Wohnen” des Bayerisches Staatsministerium für Gesundheit und Pflege"
+    },
+    {
+      "year": "2020",
+      "text": "Gastvortrag und -kritik zum Thema „Wohnen im Alter” im Rahmen des Projektes „Living like an artist II”, Lehrstuhl Gebäudelehre, Univ.-Prof. Anne Julchen Bernhardt"
+    },
+    {
+      "year": "2020",
+      "text": "Referent der „Care Invest – Bundeskonferenz Wohnungswirtschaft und Pflege”, Berlin"
+    },
+    {
+      "year": "2019",
+      "text": "Referent der Fachtagung „Wohnen inklusiv” der Gold-Kraemer-Stiftung, Frechen"
+    },
+    {
+      "year": "2016/2017",
+      "text": "Aussteller Quartiersmarkt im Rahmen des REHACARE-Kongress „Wir fürs Quartier” auf Einladung des Kuratorium Deutsche Altershilfe, Köln"
+    }
+  ],
+  "ehrenamt": [
+    {
+      "year": "seit 2022",
+      "text": "Aufsichtsratsvorsitzender der Lebenshilfe Köln e.V."
+    },
+    {
+      "year": "seit 2016",
+      "text": "Mitglied des Aufsichtsrats der Lebenshilfe Köln e.V."
     }
   ]
 }

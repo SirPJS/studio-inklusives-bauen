@@ -42,7 +42,7 @@ const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
   return (
     <div className={`relative ${className}`} ref={containerRef}>
       {/* Main Image - fixed aspect ratio based on first image */}
-      <div className="relative w-full bg-white overflow-hidden group">
+      <div className="relative w-full bg-background overflow-hidden group">
         <div
           style={
             aspectRatio
@@ -77,20 +77,20 @@ const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
                 e.stopPropagation();
                 goToPrevious();
               }}
-              className="gallery-nav left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="gallery-nav left-2 opacity-0 group-hover:opacity-100"
               aria-label="Vorheriges Bild"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={24} />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="gallery-nav right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              aria-label="N&auml;chstes Bild"
+              className="gallery-nav right-2 opacity-0 group-hover:opacity-100"
+              aria-label="Nächstes Bild"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={24} />
             </button>
           </>
         )}

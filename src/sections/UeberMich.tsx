@@ -36,7 +36,10 @@ const UeberMich = () => {
           <TimelineSection title="Forschung" entries={cvData.forschung} />
         )}
         {cvData.vortraege.length > 0 && (
-          <TimelineSection title="Vortr&auml;ge, Workshops, architektonische Beratungen" entries={cvData.vortraege} />
+          <TimelineSection title="Vorträge, Workshops, architektonische Beratungen" entries={cvData.vortraege} />
+        )}
+        {cvData.ehrenamt && cvData.ehrenamt.length > 0 && (
+          <TimelineSection title="Ehrenamt" entries={cvData.ehrenamt} />
         )}
       </div>
       </div>

@@ -88,7 +88,7 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
                 onClick={() => setShowText(false)}
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer mt-4"
               >
-                schlie&szlig;en
+                schließen
               </button>
             </div>
           )}
