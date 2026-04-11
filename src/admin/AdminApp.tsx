@@ -34,26 +34,40 @@ const AdminApp = () => {
     setTimeout(() => setMessage(null), 4000);
   }, []);
 
+  /** Get a fresh auth token (auto-refreshes if expired) */
+  const getToken = useCallback(async (): Promise<string> => {
+    if (!user) throw new Error("Nicht eingeloggt");
+    // user.jwt() refreshes the token automatically if expired
+    if (typeof user.jwt === "function") {
+      return await user.jwt();
+    }
+    const token = user.token?.access_token;
+    if (!token) throw new Error("Nicht eingeloggt");
+    return token;
+  }, [user]);
+
+  /** Get SHA for an existing file (returns empty string for new files) */
+  const getFileSha = useCallback(async (path: string, token: string): Promise<string> => {
+    try {
+      const resp = await fetch("/.netlify/git/github/contents/" + path, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        return data.sha;
+      }
+    } catch { /* new file */ }
+    return "";
+  }, []);
+
   /** Save a text file (JSON) via Git Gateway */
   const saveFile = useCallback(async (path: string, content: string, commitMessage: string) => {
     setSaving(true);
     try {
-      const token = user?.token?.access_token;
-      if (!token) throw new Error("Nicht eingeloggt");
+      const token = await getToken();
+      const sha = await getFileSha(path, token);
 
-      // Try to get SHA for existing file via Git Gateway
-      let sha = "";
-      try {
-        const getResp = await fetch("/.netlify/git/github/contents/" + path, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (getResp.ok) {
-          const data = await getResp.json();
-          sha = data.sha;
-        }
-      } catch { /* new file, no SHA needed */ }
-
-      const gwResp = await fetch("/.netlify/git/github/contents/" + path, {
+      const resp = await fetch("/.netlify/git/github/contents/" + path, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -66,33 +80,20 @@ const AdminApp = () => {
         }),
       });
 
-      if (!gwResp.ok) throw new Error(await gwResp.text());
+      if (!resp.ok) throw new Error(await resp.text());
       showMessage("Gespeichert! Seite wird in 1-2 Min. aktualisiert.");
     } catch (err: any) {
       showMessage("Fehler: " + err.message, "error");
     } finally {
       setSaving(false);
     }
-  }, [user, showMessage]);
+  }, [getToken, getFileSha, showMessage]);
 
   /** Upload a binary file (image) via Git Gateway */
   const uploadFile = useCallback(async (path: string, base64Content: string, commitMessage: string) => {
-    const token = user?.token?.access_token;
-    if (!token) throw new Error("Nicht eingeloggt");
+    const token = await getToken();
 
-    // Check if file already exists
-    let sha = "";
-    try {
-      const getResp = await fetch("/.netlify/git/github/contents/" + path, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (getResp.ok) {
-        const data = await getResp.json();
-        sha = data.sha;
-      }
-    } catch { /* new file */ }
-
-    const gwResp = await fetch("/.netlify/git/github/contents/" + path, {
+    const resp = await fetch("/.netlify/git/github/contents/" + path, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -101,12 +102,11 @@ const AdminApp = () => {
       body: JSON.stringify({
         message: commitMessage,
         content: base64Content,
-        ...(sha ? { sha } : {}),
       }),
     });
 
-    if (!gwResp.ok) throw new Error(await gwResp.text());
-  }, [user]);
+    if (!resp.ok) throw new Error(await resp.text());
+  }, [getToken]);
 
   // Login screen
   if (!user) {
