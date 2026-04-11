@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditableField from "./EditableField";
+import { Plus, Trash2, GripVertical } from "lucide-react";
 import initialData from "../content/cv.json";
 
 interface Props {
@@ -11,7 +11,7 @@ interface TimelineEntry {
   text: string;
 }
 
-const TimelineEditor = ({
+const TimelineSection = ({
   title,
   entries,
   onChange,
@@ -27,38 +27,41 @@ const TimelineEditor = ({
   };
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-bold text-sm">{title}</h3>
+    <section className="space-y-3">
+      <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{title}</h4>
       {entries.map((entry, i) => (
-        <div key={i} className="flex items-start space-x-3 group">
+        <div key={i} className="flex items-start gap-2 group">
+          <GripVertical size={14} className="text-muted-foreground/30 mt-2.5 flex-shrink-0" />
           <input
             type="text"
             value={entry.year}
             onChange={(e) => update(i, "year", e.target.value)}
-            className="w-28 shrink-0 p-2 border border-border rounded text-xs font-medium"
+            className="w-28 flex-shrink-0 px-3 py-2 border border-border rounded-lg text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground"
             placeholder="Jahr"
           />
           <textarea
             value={entry.text}
             onChange={(e) => update(i, "text", e.target.value)}
-            className="flex-1 p-2 border border-border rounded text-xs min-h-[60px]"
-            placeholder="Text"
+            className="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground resize-y min-h-[44px]"
+            placeholder="Beschreibung"
+            rows={2}
           />
           <button
             onClick={() => onChange(entries.filter((_, j) => j !== i))}
-            className="text-red-400 hover:text-red-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity mt-2"
+            className="mt-1.5 w-8 h-8 flex items-center justify-center text-muted-foreground/50 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 opacity-0 group-hover:opacity-100 flex-shrink-0"
+            title="Eintrag entfernen"
           >
-            &times;
+            <Trash2 size={14} />
           </button>
         </div>
       ))}
       <button
         onClick={() => onChange([...entries, { year: "", text: "" }])}
-        className="text-xs text-blue-500 hover:text-blue-700"
+        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors ml-5"
       >
-        + Eintrag hinzuf&uuml;gen
+        <Plus size={14} /> Eintrag hinzufügen
       </button>
-    </div>
+    </section>
   );
 };
 
@@ -70,48 +73,66 @@ const AdminCV = ({ saveFile }: Props) => {
   };
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-lg font-bold">Lebenslauf</h2>
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold">Lebenslauf</h2>
+        <p className="text-sm text-muted-foreground mt-1">
+          Der Lebenslauf wird auf der Webseite als Zeitleiste angezeigt.
+        </p>
+      </div>
 
-      <div className="border border-border rounded-lg p-6 space-y-8 bg-muted/20">
-        <EditableField
-          label="Name"
-          value={data.name}
-          onChange={(v) => setData({ ...data, name: v })}
-        />
+      <div className="bg-white rounded-xl border border-border shadow-sm p-6 space-y-8">
+        {/* Name */}
+        <section className="space-y-3">
+          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Name</h4>
+          <input
+            type="text"
+            value={data.name}
+            onChange={(e) => setData({ ...data, name: e.target.value })}
+            className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground font-medium"
+          />
+        </section>
 
         <hr className="border-border" />
-        <TimelineEditor
+        <TimelineSection
           title="Ausbildung"
           entries={data.ausbildung}
           onChange={(e) => setData({ ...data, ausbildung: e })}
         />
 
         <hr className="border-border" />
-        <TimelineEditor
-          title="T&auml;tigkeiten"
+        <TimelineSection
+          title="Tätigkeiten"
           entries={data.taetigkeiten}
           onChange={(e) => setData({ ...data, taetigkeiten: e })}
         />
 
         <hr className="border-border" />
-        <TimelineEditor
+        <TimelineSection
           title="Forschung"
           entries={data.forschung}
           onChange={(e) => setData({ ...data, forschung: e })}
         />
 
         <hr className="border-border" />
-        <TimelineEditor
-          title="Vortr&auml;ge, Workshops, Beratungen"
+        <TimelineSection
+          title="Vorträge, Workshops, Beratungen"
           entries={data.vortraege}
           onChange={(e) => setData({ ...data, vortraege: e })}
         />
 
-        <div className="flex justify-end pt-4">
+        <hr className="border-border" />
+        <TimelineSection
+          title="Ehrenamt"
+          entries={data.ehrenamt || []}
+          onChange={(e) => setData({ ...data, ehrenamt: e })}
+        />
+
+        {/* Save */}
+        <div className="flex justify-end pt-4 border-t border-border">
           <button
             onClick={save}
-            className="px-6 py-2 bg-foreground text-background text-xs font-medium hover:opacity-80 transition-opacity"
+            className="px-6 py-2.5 bg-foreground text-background text-sm font-medium rounded-lg hover:opacity-80 transition-opacity"
           >
             Speichern
           </button>

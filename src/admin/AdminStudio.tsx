@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditableField from "./EditableField";
+import { Plus, Trash2 } from "lucide-react";
 import initialData from "../content/studio.json";
 
 interface Props {
@@ -20,73 +20,110 @@ const AdminStudio = ({ saveFile }: Props) => {
   };
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-lg font-bold">Studio-Text</h2>
-
-      <div className="border border-border rounded-lg p-6 space-y-6 bg-muted/20">
-        <p className="text-xs text-muted-foreground">
-          So erscheint der Text auf der Webseite unter den Projekten. Benutze **fett** f&uuml;r fetten Text.
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold">Studio-Text</h2>
+        <p className="text-sm text-muted-foreground mt-1">
+          Dieser Text erscheint auf der Webseite unter den Projekten.
         </p>
+      </div>
 
-        {data.paragraphs.map((p, i) => (
-          <EditableField
-            key={i}
-            label={`Absatz ${i + 1}`}
-            value={p}
-            onChange={(v) => updateParagraph(i, v)}
-            multiline
-          />
-        ))}
-
-        <div className="flex space-x-2">
+      <div className="bg-white rounded-xl border border-border shadow-sm p-6 space-y-6">
+        {/* Paragraphs */}
+        <section className="space-y-4">
+          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Textabschnitte</h4>
+          <p className="text-xs text-muted-foreground">
+            Verwende <code className="bg-muted px-1 py-0.5 rounded">**fett**</code> für fetten Text.
+          </p>
+          {data.paragraphs.map((p, i) => (
+            <div key={i} className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium">Absatz {i + 1}</label>
+                {data.paragraphs.length > 1 && (
+                  <button
+                    onClick={() => setData({ ...data, paragraphs: data.paragraphs.filter((_, j) => j !== i) })}
+                    className="text-muted-foreground hover:text-red-500 transition-colors p-1 rounded hover:bg-red-50"
+                    title="Absatz entfernen"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                )}
+              </div>
+              <textarea
+                value={p}
+                onChange={(e) => updateParagraph(i, e.target.value)}
+                rows={4}
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground resize-y"
+              />
+            </div>
+          ))}
           <button
             onClick={() => setData({ ...data, paragraphs: [...data.paragraphs, ""] })}
-            className="text-xs text-blue-500 hover:text-blue-700"
+            className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            + Absatz hinzuf&uuml;gen
+            <Plus size={14} /> Absatz hinzufügen
           </button>
-          {data.paragraphs.length > 1 && (
-            <button
-              onClick={() =>
-                setData({ ...data, paragraphs: data.paragraphs.slice(0, -1) })
-              }
-              className="text-xs text-red-400 hover:text-red-600"
-            >
-              Letzten Absatz entfernen
-            </button>
-          )}
-        </div>
+        </section>
 
         <hr className="border-border" />
 
-        <EditableField
-          label="Zitat"
-          value={data.quote}
-          onChange={(v) => setData({ ...data, quote: v })}
-        />
-        <EditableField
-          label="Zitat Autor"
-          value={data.quoteAuthor}
-          onChange={(v) => setData({ ...data, quoteAuthor: v })}
-        />
+        {/* Quote */}
+        <section className="space-y-4">
+          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Zitat</h4>
+          <div>
+            <label className="block text-sm font-medium mb-1.5">Zitat</label>
+            <input
+              type="text"
+              value={data.quote}
+              onChange={(e) => setData({ ...data, quote: e.target.value })}
+              className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1.5">Autor</label>
+            <input
+              type="text"
+              value={data.quoteAuthor}
+              onChange={(e) => setData({ ...data, quoteAuthor: e.target.value })}
+              className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground"
+            />
+          </div>
+        </section>
 
         <hr className="border-border" />
 
-        <EditableField
-          label="LinkedIn URL"
-          value={data.linkedinUrl}
-          onChange={(v) => setData({ ...data, linkedinUrl: v })}
-        />
-        <EditableField
-          label="Instagram URL"
-          value={data.instagramUrl}
-          onChange={(v) => setData({ ...data, instagramUrl: v })}
-        />
+        {/* Social Links */}
+        <section className="space-y-4">
+          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Social Media</h4>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1.5">LinkedIn URL</label>
+              <input
+                type="url"
+                value={data.linkedinUrl}
+                onChange={(e) => setData({ ...data, linkedinUrl: e.target.value })}
+                placeholder="https://linkedin.com/in/..."
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground placeholder:text-muted-foreground/50"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1.5">Instagram URL</label>
+              <input
+                type="url"
+                value={data.instagramUrl}
+                onChange={(e) => setData({ ...data, instagramUrl: e.target.value })}
+                placeholder="https://instagram.com/..."
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground placeholder:text-muted-foreground/50"
+              />
+            </div>
+          </div>
+        </section>
 
-        <div className="flex justify-end pt-4">
+        {/* Save */}
+        <div className="flex justify-end pt-4 border-t border-border">
           <button
             onClick={save}
-            className="px-6 py-2 bg-foreground text-background text-xs font-medium hover:opacity-80 transition-opacity"
+            className="px-6 py-2.5 bg-foreground text-background text-sm font-medium rounded-lg hover:opacity-80 transition-opacity"
           >
             Speichern
           </button>

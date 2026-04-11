@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Plus, Trash2, Link as LinkIcon, Type } from "lucide-react";
 import initialData from "../content/impressum.json";
 
 interface LineItem {
@@ -45,6 +46,17 @@ const AdminImpressum = ({ saveFile }: Props) => {
     setBlocks(updated);
   };
 
+  const toggleLink = (bi: number, li: number) => {
+    const updated = [...blocks];
+    const line = updated[bi].lines[li];
+    if (typeof line === "string") {
+      updated[bi].lines[li] = { type: "link", text: line, url: "" };
+    } else {
+      updated[bi].lines[li] = line.text || "";
+    }
+    setBlocks(updated);
+  };
+
   const addLine = (bi: number) => {
     const updated = [...blocks];
     updated[bi].lines.push("");
@@ -57,61 +69,43 @@ const AdminImpressum = ({ saveFile }: Props) => {
     setBlocks(updated);
   };
 
-  const addBlock = () => {
-    setBlocks([...blocks, { heading: "", lines: [""] }]);
-  };
-
-  const removeBlock = (bi: number) => {
-    setBlocks(blocks.filter((_, i) => i !== bi));
-  };
-
-  const toggleLink = (bi: number, li: number) => {
-    const updated = [...blocks];
-    const line = updated[bi].lines[li];
-    if (typeof line === "string") {
-      updated[bi].lines[li] = { type: "link", text: line, url: "" };
-    } else {
-      updated[bi].lines[li] = line.text || "";
-    }
-    setBlocks(updated);
-  };
+  const removeBlock = (bi: number) => setBlocks(blocks.filter((_, i) => i !== bi));
+  const addBlock = () => setBlocks([...blocks, { heading: "", lines: [""] }]);
 
   const save = () => {
-    saveFile(
-      "src/content/impressum.json",
-      JSON.stringify({ blocks }, null, 2),
-      "Update Impressum"
-    );
+    saveFile("src/content/impressum.json", JSON.stringify({ blocks }, null, 2), "Update Impressum");
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold">Impressum</h2>
-        <p className="text-xs text-muted-foreground">
-          Bearbeiten Sie alle Textbl&ouml;cke frei. Jeder Block kann eine &Uuml;berschrift und beliebig viele Zeilen haben.
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold">Impressum</h2>
+        <p className="text-sm text-muted-foreground mt-1">
+          Jeder Block kann eine Überschrift und beliebig viele Zeilen haben. Zeilen können als Link markiert werden.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {blocks.map((block, bi) => (
-          <div key={bi} className="border border-border rounded-lg p-5 space-y-3 bg-muted/20">
+          <div key={bi} className="bg-white rounded-xl border border-border shadow-sm p-5 space-y-3">
+            {/* Block heading */}
             <div className="flex items-center gap-2">
               <input
                 value={block.heading}
                 onChange={(e) => updateHeading(bi, e.target.value)}
-                placeholder="Überschrift (optional, fett dargestellt)"
-                className="flex-1 px-3 py-1.5 text-sm border border-border rounded bg-background font-medium"
+                placeholder="Überschrift (optional)"
+                className="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground font-medium placeholder:font-normal placeholder:text-muted-foreground/50"
               />
               <button
                 onClick={() => removeBlock(bi)}
-                className="text-xs text-red-500 hover:text-red-700 px-2"
+                className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-red-500 transition-colors rounded-lg hover:bg-red-50"
                 title="Block entfernen"
               >
-                &times;
+                <Trash2 size={14} />
               </button>
             </div>
 
+            {/* Lines */}
             {block.lines.map((line, li) => {
               const isLink = typeof line !== "string" && line.type === "link";
               const text = typeof line === "string" ? line : line.text || "";
@@ -119,35 +113,39 @@ const AdminImpressum = ({ saveFile }: Props) => {
 
               return (
                 <div key={li} className="flex items-start gap-2">
-                  <div className="flex-1 space-y-1">
+                  <div className="flex-1 space-y-1.5">
                     <input
                       value={text}
                       onChange={(e) => updateLine(bi, li, e.target.value)}
-                      placeholder="Zeile..."
-                      className="w-full px-3 py-1.5 text-xs border border-border rounded bg-background"
+                      placeholder="Text eingeben..."
+                      className="w-full px-3 py-2 border border-border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground placeholder:text-muted-foreground/50"
                     />
                     {isLink && (
                       <input
                         value={url}
                         onChange={(e) => updateLineUrl(bi, li, e.target.value)}
-                        placeholder="URL (z.B. https://... oder mailto:...)"
-                        className="w-full px-3 py-1.5 text-xs border border-border rounded bg-background text-blue-600"
+                        placeholder="URL: https://... oder mailto:..."
+                        className="w-full px-3 py-2 border border-blue-200 rounded-lg text-sm bg-blue-50/50 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-400 text-blue-700 placeholder:text-blue-300"
                       />
                     )}
                   </div>
                   <button
                     onClick={() => toggleLink(bi, li)}
-                    className={`text-xs px-2 py-1 rounded ${isLink ? 'bg-blue-100 text-blue-700' : 'bg-muted text-muted-foreground'}`}
-                    title={isLink ? "Link entfernen" : "Als Link markieren"}
+                    className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors flex-shrink-0 ${
+                      isLink
+                        ? "bg-blue-100 text-blue-600 hover:bg-blue-200"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    }`}
+                    title={isLink ? "Als Text" : "Als Link"}
                   >
-                    {isLink ? "Link" : "Text"}
+                    {isLink ? <LinkIcon size={14} /> : <Type size={14} />}
                   </button>
                   <button
                     onClick={() => removeLine(bi, li)}
-                    className="text-xs text-red-400 hover:text-red-600 px-1"
+                    className="w-8 h-8 flex items-center justify-center text-muted-foreground/50 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 flex-shrink-0"
                     title="Zeile entfernen"
                   >
-                    &times;
+                    <Trash2 size={14} />
                   </button>
                 </div>
               );
@@ -155,24 +153,24 @@ const AdminImpressum = ({ saveFile }: Props) => {
 
             <button
               onClick={() => addLine(bi)}
-              className="text-xs text-muted-foreground hover:text-foreground"
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              + Zeile hinzuf&uuml;gen
+              <Plus size={14} /> Zeile hinzufügen
             </button>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-between pt-2">
+      <div className="flex items-center justify-between">
         <button
           onClick={addBlock}
-          className="text-xs text-muted-foreground hover:text-foreground border border-border px-4 py-2 rounded"
+          className="flex items-center gap-1.5 px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground border border-border rounded-lg hover:bg-white transition-colors"
         >
-          + Block hinzuf&uuml;gen
+          <Plus size={14} /> Block hinzufügen
         </button>
         <button
           onClick={save}
-          className="px-6 py-2 bg-foreground text-background text-xs font-medium hover:opacity-80 transition-opacity"
+          className="px-6 py-2.5 bg-foreground text-background text-sm font-medium rounded-lg hover:opacity-80 transition-opacity"
         >
           Speichern
         </button>
