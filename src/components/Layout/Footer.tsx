@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Linkedin, Instagram } from "lucide-react";
 import impressumData from "../../content/impressum.json";
 
 interface LineItem {
@@ -49,13 +50,31 @@ const Footer = () => {
     <>
       <footer className="bg-background">
         <div className="container mx-auto px-6 py-12">
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
             <button
               onClick={() => setShowImpressum(true)}
               className="text-xs text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
             >
               Impressum
             </button>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/in/dr-carsten-eiden-a4194b305?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                <Linkedin size={18} strokeWidth={1.5} />
+              </a>
+              <a
+                href="https://www.instagram.com/carsteneiden?igsh=b21rbDE5enp6YzVp&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                <Instagram size={18} strokeWidth={1.5} />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
