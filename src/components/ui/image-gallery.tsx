@@ -5,9 +5,13 @@ interface ImageGalleryProps {
   images: string[];
   title: string;
   className?: string;
+  eager?: boolean;
 }
 
-const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
+/** Convert an image path to its .webp sibling */
+const toWebp = (src: string) => src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+
+const ImageGallery = ({ images, title, className = "", eager = false }: ImageGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [aspectRatio, setAspectRatio] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,7 +26,8 @@ const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
     const src = images[0].startsWith("http")
       ? images[0]
       : `${import.meta.env.BASE_URL || "/"}${images[0]}`;
-    img.src = src;
+    // Use webp for faster aspect-ratio probe
+    img.src = toWebp(src);
   }, [images]);
 
   const goToNext = () => {
@@ -39,6 +44,11 @@ const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
 
   if (!images.length) return null;
 
+  const base = import.meta.env.BASE_URL || "/";
+  const currentSrc = `${base}${images[currentIndex]}`;
+  const currentWebp = toWebp(currentSrc);
+  const isFirst = eager && currentIndex === 0;
+
   return (
     <div className={`relative ${className}`} ref={containerRef}>
       {/* Main Image - fixed aspect ratio based on first image */}
@@ -50,23 +60,26 @@ const ImageGallery = ({ images, title, className = "" }: ImageGalleryProps) => {
               : undefined
           }
         >
-          <img
-            src={`${import.meta.env.BASE_URL || "/"}${images[currentIndex]}`}
-            alt={`${title} - Bild ${currentIndex + 1}`}
-            className={`${
-              aspectRatio ? "absolute inset-0" : ""
-            } w-full h-full object-contain transition-opacity duration-300`}
-            loading="lazy"
-            onError={(e) => {
-              const target = e.currentTarget as HTMLImageElement;
-              if (!target.getAttribute("data-fallback-tried")) {
-                target.setAttribute("data-fallback-tried", "true");
-                target.src = `/${images[currentIndex]}`;
-              } else {
-                target.style.display = "none";
-              }
-            }}
-          />
+          <picture>
+            <source srcSet={currentWebp} type="image/webp" />
+            <img
+              src={currentSrc}
+              alt={`${title} - Bild ${currentIndex + 1}`}
+              className={`${
+                aspectRatio ? "absolute inset-0" : ""
+              } w-full h-full object-contain transition-opacity duration-300`}
+              loading={isFirst ? "eager" : "lazy"}
+              decoding={isFirst ? "sync" : "async"}
+              fetchPriority={isFirst ? "high" : "auto"}
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                if (!target.getAttribute("data-fallback-tried")) {
+                  target.setAttribute("data-fallback-tried", "true");
+                  target.src = `/${images[currentIndex]}`;
+                }
+              }}
+            />
+          </picture>
         </div>
 
         {/* Navigation Arrows */}

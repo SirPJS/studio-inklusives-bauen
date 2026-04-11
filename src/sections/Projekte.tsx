@@ -24,7 +24,7 @@ const projects: ProjectData[] = Object.values(projectModules)
   .map((mod: any) => mod.default || mod)
   .sort((a: ProjectData, b: ProjectData) => b.id - a.id);
 
-const ProjectCard = ({ project }: { project: ProjectData }) => {
+const ProjectCard = ({ project, isFirst = false }: { project: ProjectData; isFirst?: boolean }) => {
   const [showText, setShowText] = useState(false);
 
   return (
@@ -37,6 +37,7 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
               images={project.images}
               title={project.title}
               className="w-full"
+              eager={isFirst}
             />
           </div>
         </div>
@@ -102,8 +103,8 @@ const Projekte = () => {
   return (
     <section id="projekte" className="pb-16">
       <div className="space-y-12 md:space-y-16">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects.map((project, i) => (
+          <ProjectCard key={project.id} project={project} isFirst={i === 0} />
         ))}
       </div>
     </section>
