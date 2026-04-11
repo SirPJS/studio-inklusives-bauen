@@ -34,15 +34,22 @@ const AdminApp = () => {
     setTimeout(() => setMessage(null), 4000);
   }, []);
 
-  /** Get a fresh auth token (auto-refreshes if expired) */
+  /** Get a fresh auth token - always from the live widget, not stale React state */
   const getToken = useCallback(async (): Promise<string> => {
-    if (!user) throw new Error("Nicht eingeloggt");
-    // user.jwt() refreshes the token automatically if expired
-    if (typeof user.jwt === "function") {
-      return await user.jwt();
-    }
-    const token = user.token?.access_token;
-    if (!token) throw new Error("Nicht eingeloggt");
+    // Always get the current user from the widget (not from React state)
+    const currentUser = window.netlifyIdentity?.currentUser?.();
+    if (!currentUser) throw new Error("Nicht eingeloggt – bitte Seite neu laden");
+
+    // Try jwt(true) to force-refresh the token
+    try {
+      if (typeof currentUser.jwt === "function") {
+        return await currentUser.jwt(true);
+      }
+    } catch { /* refresh failed, try stored token */ }
+
+    // Fall back to stored access token
+    const token = currentUser.token?.access_token || user?.token?.access_token;
+    if (!token) throw new Error("Token abgelaufen – bitte neu einloggen");
     return token;
   }, [user]);
 
